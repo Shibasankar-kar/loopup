@@ -6,4 +6,5 @@ export type RootStackParamList = {
   Discover: undefined;
   Inbox: undefined;
   Profile: undefined;
+  SignIn:undefined;
 };
