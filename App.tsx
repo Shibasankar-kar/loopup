@@ -2,8 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import React from 'react';
 
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-
-import Navigation from './app/navigation/Navigation';
+import NavigationRoutes from './app/navigation/Routes';
 
 const App = () => {
   GoogleSignin.configure({
@@ -14,11 +13,7 @@ const App = () => {
       '1075817863798-m6ed1qo2oipdc857ldq41mtrb1n9drng.apps.googleusercontent.com',
   });
 
-  return (
-    <View>
-      <Navigation />
-    </View>
-  );
+  return <NavigationRoutes />;
 };
 
 export default App;
