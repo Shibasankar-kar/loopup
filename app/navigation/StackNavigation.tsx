@@ -11,7 +11,7 @@ const StackNavigator: FC = () => {
   return (
     <View style={{flex: 1}}>
       <Stack.Navigator
-        initialRouteName={'SignIn'}
+        initialRouteName={'BottomTabBar'}
         detachInactiveScreens={true}
         screenOptions={{
           headerShown: false,
