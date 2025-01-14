@@ -1,7 +1,5 @@
 import {Dimensions} from 'react-native';
 
-
-
 export const SizeConfig = {
   width: Dimensions.get('window').width / 100,
   deviceWidth: Dimensions.get('window').width,
