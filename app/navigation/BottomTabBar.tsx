@@ -33,50 +33,52 @@ const BottomTabBar: FC = () => {
           let iconName;
           let IconComponent = MaterialCommunityIcons;
 
-          if (route.name === 'Payment') {
-            iconName = focused ? 'wallet' : 'wallet-outline';
+          if (route.name === 'Discover') {
+            iconName = focused ? 'search' : 'search';
+            IconComponent = Ionicons;
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'person' : 'person-outline';
             IconComponent = Ionicons;
           } else {
             switch (route.name) {
               case 'Home':
                 iconName = focused ? 'home-variant' : 'home-variant-outline';
                 break;
-              case 'Discover':
-                iconName = focused ? 'cart' : 'cart-outline';
-                break;
-              case 'Profile':
-                iconName = focused ? 'account' : 'account-outline';
-                break;
               case 'Inbox':
-                iconName = focused ? 'account' : 'account-outline';
+                iconName = focused ? 'message' : 'message-reply-outline';
                 break;
               default:
                 iconName = 'home-variant-outline';
             }
           }
 
-          const animatedScale = focused ? 1.2 : 1;
+          const animatedScale = focused ? 1.15 : 1;
 
           return (
             <Animated.View style={{transform: [{scale: animatedScale}]}}>
               <IconComponent
                 name={iconName}
-                size={SizeConfig.width * 6}
+                size={SizeConfig.width * 5}
                 color={focused ? '#7676dc' : '#A9A9A9'}
               />
             </Animated.View>
           );
         },
-        tabBarButton: props => (
-          <TouchableOpacity
-            activeOpacity={0.8}
-            delayLongPress={1000}
-            {...props}
-            style={
-              route.name === 'Add' ? styles.addButtonContainer : props.style
-            }
-          />
-        ),
+        tabBarButton: props =>
+          route.name === 'Add' ? (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              delayLongPress={1000}
+              {...props}
+              style={[props.style, styles.addButtonContainer]}
+            />
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              {...props}
+              delayLongPress={1000}
+            />
+          ),
         tabBarLabel: ({focused}) => {
           let label;
           switch (route.name) {
@@ -101,7 +103,8 @@ const BottomTabBar: FC = () => {
                 styles.iconText,
                 {
                   color: focused ? '#7676dc' : '#A9A9A9',
-                  fontFamily: Fonts.regular.fontFamily,
+                  fontFamily: Fonts.semiBold.fontFamily,
+                  fontWeight: Fonts.semiBold.fontWeight,
                 },
               ]}>
               {label}
@@ -113,11 +116,11 @@ const BottomTabBar: FC = () => {
       <Tab.Screen name="Discover" component={DiscoverScreen} />
       <Tab.Screen
         name="Add"
-        component={HomeScreen}
+        component={HomeScreen} // Replace with your desired component for "Add"
         options={{
           tabBarIcon: () => (
             <View style={styles.addButton}>
-              <Ionicons name="add" size={SizeConfig.width * 8} color="#fff" />
+              <Ionicons name="add" size={SizeConfig.width * 6.5} color="#000" />
             </View>
           ),
           tabBarLabel: () => null,
@@ -134,9 +137,8 @@ export default BottomTabBar;
 export const createStyles = () =>
   StyleSheet.create({
     tabBar: {
-      height: SizeConfig.height * 10,
+      height: SizeConfig.height * 9,
       backgroundColor: '#000',
-
       position: 'absolute',
       left: 0,
       right: 0,
@@ -146,27 +148,31 @@ export const createStyles = () =>
       shadowOpacity: 0.3,
       shadowRadius: 5,
       overflow: 'hidden',
+      paddingBottom: Platform.OS === 'ios' ? 20 : 0,
     },
     addButtonContainer: {
       justifyContent: 'center',
       alignItems: 'center',
       width: SizeConfig.width * 14,
-      height: SizeConfig.width * 14,
-      backgroundColor: '#000',
-      borderRadius: SizeConfig.width * 7,
-      marginTop: -SizeConfig.height * 3,
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2},
+      height: SizeConfig.width * 10,
+      backgroundColor: '#fff',
+      borderRadius: SizeConfig.width * 3,
+      position: 'absolute',
+      top: SizeConfig.height * 1.5,
+      shadowColor: 'green',
+      shadowOffset: {width: 10, height: 2},
       shadowOpacity: 0.25,
       shadowRadius: 3.5,
+      left: SizeConfig.width * 4,
     },
     addButton: {
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#FF0050',
-      width: SizeConfig.width * 12,
-      height: SizeConfig.width * 12,
-      borderRadius: SizeConfig.width * 6,
+      // backgroundColor: '#FF0050',
+      // width: SizeConfig.width * 12,
+      // height: SizeConfig.width * 12,
+      // borderRadius: SizeConfig.width * 1.5,
+      // top: SizeConfig.height * 4,
     },
     iconText: {
       fontSize: SizeConfig.width * 3.5,
