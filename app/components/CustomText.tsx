@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet, TextStyle, TextProps} from 'react-native';
+import {Text, StyleSheet, TextStyle, TextProps, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {Fonts} from '../assets/component/component';
 
@@ -27,7 +27,6 @@ const CustomText: React.FC<Props> = ({
         {
           color: colors.text,
           fontSize: fontSize,
-          fontFamily: fontFamily,
         },
         style,
       ]}
@@ -37,10 +36,10 @@ const CustomText: React.FC<Props> = ({
   );
 };
 
+export default CustomText;
+
 const styles = StyleSheet.create({
   text: {
     textAlign: 'left',
   },
 });
-
-export default CustomText;

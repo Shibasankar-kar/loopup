@@ -15,12 +15,15 @@ import CustomText from '../../components/CustomText';
 import {Fonts, SizeConfig} from '../../assets/component/component';
 import App from '../../../App';
 import CustomInput from '../../components/CustomInput';
+import {useTheme} from '@react-navigation/native';
+import Feather from 'react-native-vector-icons/Feather';
 interface signIn {
   navigation: StackNavigationProp<RootStackParamList, 'SignIn'>;
 }
 
 const LoginScreen: FC<signIn> = ({navigation}) => {
   const insets = useSafeAreaInsets();
+  const {colors} = useTheme();
 
   return (
     <View style={styles.container}>
@@ -28,7 +31,7 @@ const LoginScreen: FC<signIn> = ({navigation}) => {
         <StatusBar backgroundColor="transparent" translucent={true} />
       </View>
 
-      <View style={styles.contentModal}>
+      <View style={[styles.contentModal, {backgroundColor: colors.background}]}>
         <CustomText
           fontFamily={Fonts.bold}
           style={{
@@ -42,12 +45,13 @@ const LoginScreen: FC<signIn> = ({navigation}) => {
         <CustomText
           fontFamily={Fonts.bold}
           style={{
-            fontSize: SizeConfig.fontSize * 3,
+            fontSize: SizeConfig.fontSize * 4,
             textAlign: 'center',
           }}>
           Don't have an account?
         </CustomText>
         <CustomInput label="Name" />
+        <CustomInput label="password" rightIcon={<Feather></Feather>} />
       </View>
     </View>
     // <View
@@ -82,12 +86,13 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green',
+    backgroundColor: '#2B72E7',
     justifyContent: 'center',
     padding: SizeConfig.width * 4.5,
   },
   contentModal: {
-    backgroundColor: 'rgba(255,255,255,.6)',
+    borderColor: '#fff',
+    borderWidth: 0.8,
     alignSelf: 'center',
     borderRadius: 12,
     padding: SizeConfig.width * 4,
